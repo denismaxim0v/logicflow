@@ -177,6 +177,54 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/parser.o: src/parser.cpp.o
+.PHONY : src/parser.o
+
+# target to build an object file
+src/parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/parser.cpp.o
+.PHONY : src/parser.cpp.o
+
+src/parser.i: src/parser.cpp.i
+.PHONY : src/parser.i
+
+# target to preprocess a source file
+src/parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/parser.cpp.i
+.PHONY : src/parser.cpp.i
+
+src/parser.s: src/parser.cpp.s
+.PHONY : src/parser.s
+
+# target to generate assembly for a file
+src/parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/parser.cpp.s
+.PHONY : src/parser.cpp.s
+
+src/printer.o: src/printer.cpp.o
+.PHONY : src/printer.o
+
+# target to build an object file
+src/printer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/printer.cpp.o
+.PHONY : src/printer.cpp.o
+
+src/printer.i: src/printer.cpp.i
+.PHONY : src/printer.i
+
+# target to preprocess a source file
+src/printer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/printer.cpp.i
+.PHONY : src/printer.cpp.i
+
+src/printer.s: src/printer.cpp.s
+.PHONY : src/printer.s
+
+# target to generate assembly for a file
+src/printer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/printer.cpp.s
+.PHONY : src/printer.cpp.s
+
 src/repl.o: src/repl.cpp.o
 .PHONY : src/repl.o
 
@@ -216,6 +264,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/parser.o"
+	@echo "... src/parser.i"
+	@echo "... src/parser.s"
+	@echo "... src/printer.o"
+	@echo "... src/printer.i"
+	@echo "... src/printer.s"
 	@echo "... src/repl.o"
 	@echo "... src/repl.i"
 	@echo "... src/repl.s"
