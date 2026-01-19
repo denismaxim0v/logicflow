@@ -1,5 +1,7 @@
 #include "repl.h"
 #include "lexer.h"
+#include "parser.h"
+#include "printer.h"
 
 #include <iostream>
 #include <string>
@@ -39,7 +41,7 @@ void print_tokens(const std::vector<Token> &tokens) {
     };
     std::cout << " , " << token.val << " }\n";
   }
-  std::cout << "\n>> ";
+  std::cout << "\n";
 }
 
 void start_repl() {
@@ -55,5 +57,11 @@ void start_repl() {
     auto tokens = lexer.tokenize();
 
     print_tokens(tokens);
+
+    Parser parser = Parser(tokens);
+    auto ast = parser.parse();
+
+    print_tree(*ast);
+    std::cout << "\n>> ";
   }
 };
