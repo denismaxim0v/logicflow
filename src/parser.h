@@ -5,47 +5,43 @@
 #include <string>
 #include <variant>
 
-struct Expr;
-
-struct IdentifierExpr {
-  std::string name;
-};
-
-struct UnaryExpr {
-  std::string name;
-  std::unique_ptr<Expr> rhs;
-};
-
-struct BinaryExpr {
-  std::string op;
-  std::unique_ptr<Expr> left;
-  std::unique_ptr<Expr> right;
-};
+enum class ExprKind { Identifier, Unary, Binary };
 
 struct Expr {
-  using Node = std::variant<IdentifierExpr, UnaryExpr, BinaryExpr>;
-  Node node;
+  ExprKind kind;
 
-  template <typename T> explicit Expr(T value) : node(std::move(value)) {}
+  std::string name;
+
+  char op = 0;
+  int lhs = -1;
+  int rhs = -1;
+};
+
+struct Expressions {
+  std::vector<Expr> nodes;
+
+  int add(const Expr &e) {
+    nodes.push_back(e);
+    return (int)nodes.size() - 1;
+  }
 };
 
 class Parser {
 public:
-  explicit Parser(std::vector<Token> tokens);
-
-  std::unique_ptr<Expr> parse();
+  Parser(std::vector<Token> tokens, Expressions& expressions);
+  int parse();
 
 private:
   const Token &peek() const;
   const Token &advance();
 
+  int parse_expr(int min_bp);
+  int parse_prefix();
+
   bool match(TokenType type);
-
-  std::unique_ptr<Expr> parse_expr(int min_bp);
-  std::unique_ptr<Expr> parse_prefix();
-
   int infix_binding_power(TokenType type) const;
 
-  std::vector<Token> tokens;
+  const std::vector<Token> tokens;
   size_t pos = 0;
+  Expressions& expressions;
 };

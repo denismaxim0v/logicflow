@@ -129,6 +129,30 @@ LogicInterp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/build
 .PHONY : LogicInterp/fast
 
+src/eval.o: src/eval.cpp.o
+.PHONY : src/eval.o
+
+# target to build an object file
+src/eval.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/eval.cpp.o
+.PHONY : src/eval.cpp.o
+
+src/eval.i: src/eval.cpp.i
+.PHONY : src/eval.i
+
+# target to preprocess a source file
+src/eval.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/eval.cpp.i
+.PHONY : src/eval.cpp.i
+
+src/eval.s: src/eval.cpp.s
+.PHONY : src/eval.s
+
+# target to generate assembly for a file
+src/eval.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/eval.cpp.s
+.PHONY : src/eval.cpp.s
+
 src/lexer.o: src/lexer.cpp.o
 .PHONY : src/lexer.o
 
@@ -201,30 +225,6 @@ src/parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
-src/printer.o: src/printer.cpp.o
-.PHONY : src/printer.o
-
-# target to build an object file
-src/printer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/printer.cpp.o
-.PHONY : src/printer.cpp.o
-
-src/printer.i: src/printer.cpp.i
-.PHONY : src/printer.i
-
-# target to preprocess a source file
-src/printer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/printer.cpp.i
-.PHONY : src/printer.cpp.i
-
-src/printer.s: src/printer.cpp.s
-.PHONY : src/printer.s
-
-# target to generate assembly for a file
-src/printer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/printer.cpp.s
-.PHONY : src/printer.cpp.s
-
 src/repl.o: src/repl.cpp.o
 .PHONY : src/repl.o
 
@@ -249,6 +249,30 @@ src/repl.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/repl.cpp.s
 .PHONY : src/repl.cpp.s
 
+src/table.o: src/table.cpp.o
+.PHONY : src/table.o
+
+# target to build an object file
+src/table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/table.cpp.o
+.PHONY : src/table.cpp.o
+
+src/table.i: src/table.cpp.i
+.PHONY : src/table.i
+
+# target to preprocess a source file
+src/table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/table.cpp.i
+.PHONY : src/table.cpp.i
+
+src/table.s: src/table.cpp.s
+.PHONY : src/table.s
+
+# target to generate assembly for a file
+src/table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LogicInterp.dir/build.make CMakeFiles/LogicInterp.dir/src/table.cpp.s
+.PHONY : src/table.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -258,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... LogicInterp"
+	@echo "... src/eval.o"
+	@echo "... src/eval.i"
+	@echo "... src/eval.s"
 	@echo "... src/lexer.o"
 	@echo "... src/lexer.i"
 	@echo "... src/lexer.s"
@@ -267,12 +294,12 @@ help:
 	@echo "... src/parser.o"
 	@echo "... src/parser.i"
 	@echo "... src/parser.s"
-	@echo "... src/printer.o"
-	@echo "... src/printer.i"
-	@echo "... src/printer.s"
 	@echo "... src/repl.o"
 	@echo "... src/repl.i"
 	@echo "... src/repl.s"
+	@echo "... src/table.o"
+	@echo "... src/table.i"
+	@echo "... src/table.s"
 .PHONY : help
 
 
