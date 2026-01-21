@@ -1,7 +1,7 @@
 #include "repl.h"
 #include "lexer.h"
 #include "parser.h"
-#include "printer.h"
+#include "table.h"
 
 #include <iostream>
 #include <string>
@@ -58,10 +58,11 @@ void start_repl() {
 
     print_tokens(tokens);
 
-    Parser parser = Parser(tokens);
-    auto ast = parser.parse();
+    Expressions expressions;
+    Parser parser = Parser(tokens, expressions);
+    auto root = parser.parse();
 
-    print_tree(*ast);
+    print_truth_table(root, expressions);
     std::cout << "\n>> ";
   }
 };

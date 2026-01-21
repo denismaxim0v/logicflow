@@ -1,7 +1,8 @@
 #include "parser.h"
 #include <stdexcept>
 
-Parser::Parser(std::vector<Token> tokens) : tokens(std::move(tokens)) {};
+Parser::Parser(std::vector<Token> t, Expressions &e)
+    : tokens(t), expressions(e) {};
 
 const Token &Parser::peek() const { return tokens[pos]; };
 
@@ -16,7 +17,7 @@ bool Parser::match(TokenType type) {
   return false;
 }
 
-std::unique_ptr<Expr> Parser::parse() {
+int Parser::parse() {
   auto expr = parse_expr(0);
 
   if (peek().type != TokenType::Eof) {
@@ -26,7 +27,7 @@ std::unique_ptr<Expr> Parser::parse() {
   return expr;
 }
 
-std::unique_ptr<Expr> Parser::parse_expr(int min_bp) {
+int Parser::parse_expr(int min_bp) {
   auto lhs = parse_prefix();
 
   while (true) {
@@ -42,46 +43,43 @@ std::unique_ptr<Expr> Parser::parse_expr(int min_bp) {
 
     auto rhs = parse_expr(next_min_bp);
 
-    lhs = std::make_unique<Expr>(
-        BinaryExpr{std::string(op_c.val), std::move(lhs), std::move(rhs)});
+    lhs = expressions.add(Expr{
+        .kind = ExprKind::Binary, .op = op_c.val[0], .lhs = lhs, .rhs = rhs});
   }
 
   return lhs;
 };
 
-std::unique_ptr<Expr> Parser::parse_prefix() {
+int Parser::parse_prefix() {
   Token tok = advance();
 
-  switch (tok.type) {
-  case TokenType::Identifier:
-    return std::make_unique<Expr>(IdentifierExpr{std::string(tok.val)});
-
-  case TokenType::Not: {
-    auto rhs = parse_expr(70);
-    return std::make_unique<Expr>(UnaryExpr{"!", std::move(rhs)});
+  if (tok.type == TokenType::Identifier) {
+    return expressions.add(
+        Expr{.kind = ExprKind::Identifier, .name = std::string(tok.val)});
   }
-  case TokenType::LeftParen: {
-    auto expr = parse_expr(0);
-    if (!match(TokenType::RightParen)) {
-      throw std::runtime_error("Expected closing paren");
-    }
 
+  if (tok.type == TokenType::Not) {
+    int rhs = parse_expr(70);
+    return expressions.add(
+        Expr{.kind = ExprKind::Unary, .op = '!', .rhs = rhs});
+  }
+
+  if (tok.type == TokenType::LeftParen) {
+    int expr = parse_expr(0);
+    if (!match(TokenType::RightParen))
+      throw std::runtime_error("Expected ')'");
     return expr;
   }
-  default:
-    throw std::runtime_error("Unexpected token.");
-  }
+
+  throw std::runtime_error("Unexpected token");
 }
 
 int Parser::infix_binding_power(TokenType type) const {
-  switch (type) {
-  case TokenType::And:
+  if (type == TokenType::And)
     return 60;
-  case TokenType::Xor:
+  if (type == TokenType::Xor)
     return 50;
-  case TokenType::Or:
+  if (type == TokenType::Or)
     return 40;
-  default:
-    return -1;
-  }
+  return -1;
 }
